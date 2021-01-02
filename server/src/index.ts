@@ -1,20 +1,23 @@
-import { launch } from 'puppeteer';
-import { newEggHandler } from './handlers/newegg';
+import express from 'express';
 import { schedule } from 'node-cron';
 import { products } from './products';
+import { checkAvailibilty } from './checkAvailibility';
+import { config } from 'dotenv';
+import cors from 'cors';
+config();
 
 // const wait = (t: number) => new Promise(resolve => setTimeout(resolve, t));
 
 const main = async () => {
-  console.log('running browser');
-  const browser = await launch({ headless: false });
-  const page = await browser.newPage();
-  for (const product of products) {
-    await newEggHandler(product, page).catch(err => console.error(err));
-  }
-  await browser.close();
-};
+  const app = express();
 
-schedule('* * * * *', main);
+  app.use(cors());
+
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+
+  await checkAvailibilty(products).catch(err => console.error(err));
+  schedule('* * * * *', async () => await checkAvailibilty(products));
+};
 
 main().catch(err => console.error(err));
