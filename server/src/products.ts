@@ -6,6 +6,7 @@ export const products: Product[] = [
       'https://www.newegg.com/abs-ali468/p/N82E16883360053?Description=RTX%203070&cm_re=RTX_3070-_-83-360-053-_-Product&quicklink=true',
     name: 'random gaming pc',
     store: 'newegg',
+    category: 'rtx3070',
   },
   // {
   //   url:

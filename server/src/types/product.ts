@@ -4,4 +4,5 @@ export interface Product {
   store: 'newegg' | 'bestbuy';
   isAvailable?: boolean;
   lastCheck?: Date;
+  category: string;
 }
