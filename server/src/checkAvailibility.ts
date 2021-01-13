@@ -28,7 +28,7 @@ export const checkAvailibilty = async (products: IProduct[]) => {
     product.isAvailable = isAvailable;
     product.lastCheck = new Date();
     product.save();
-    if (isAvailable !== wasAvailible) {
+    if (isAvailable !== wasAvailible && isAvailable === true) {
       const channel = await discordClient.channels.fetch('795000612751671317');
       if (channel.type === 'text') {
         (channel as TextChannel).send(

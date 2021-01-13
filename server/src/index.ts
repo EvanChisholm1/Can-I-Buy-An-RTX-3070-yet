@@ -9,8 +9,6 @@ import { discordClient } from './discordClient';
 import Api from './api';
 config();
 
-// const wait = (t: number) => new Promise(resolve => setTimeout(resolve, t));
-
 const main = async () => {
   discordClient.login(process.env.DISCORD_TOKEN);
 

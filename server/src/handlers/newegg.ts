@@ -6,12 +6,15 @@ export const isNewEggAvailable = async (
   page: Page
 ): Promise<boolean> => {
   await page.goto(url);
-  const productBuy = await page.$('#ProductBuy');
-  const innerHTML = await productBuy?.evaluate(el => {
+  const body = await page.$('body');
+  const innerHTML = await body?.evaluate(el => {
     return el.innerHTML;
   });
 
-  if (innerHTML?.includes('Sold Out')) {
+  if (
+    innerHTML?.toLowerCase().includes('sold out') ||
+    innerHTML?.toLowerCase().includes('out of stock')
+  ) {
     console.log(`${name} is sold out`);
     return false;
   } else {

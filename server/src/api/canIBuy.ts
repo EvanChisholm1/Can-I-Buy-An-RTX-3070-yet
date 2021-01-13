@@ -6,6 +6,7 @@ export const canIBuy = async (
   res: Response<{ canIBuy: boolean }>
 ) => {
   const product = await ProductModel.findOne({ isAvailable: true });
+  console.log(product?.isAvailable);
   if (product) res.json({ canIBuy: true });
   else res.json({ canIBuy: false });
 };
