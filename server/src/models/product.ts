@@ -8,7 +8,10 @@ const productSchema = new Schema({
   url: String,
   store: String,
   isAvailable: Boolean,
-  lastCheck: Date,
+  lastCheck: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 export const ProductModel: Model<IProduct> = model('Product', productSchema);
